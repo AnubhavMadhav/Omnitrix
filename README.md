@@ -62,7 +62,7 @@ ollama pull deepseek-coder  # For Coding tasks (Free)
 ### 2. Configuration
 If you want to test the **Premium Tier**, you need a Groq API Key.
 ```bash
-export GROQ_API_KEY="gsk_your_key_here"
+export GROQ_API_KEY="gsk_your_groq_api_key_here"
 ```
 
 ### 3. Installation
