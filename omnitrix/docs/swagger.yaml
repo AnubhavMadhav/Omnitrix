@@ -1,0 +1,78 @@
+basePath: /api/v1
+definitions:
+  router.ChatRequest:
+    properties:
+      prompt:
+        description: '''required'' returns 400 if missing'
+        type: string
+    required:
+    - prompt
+    type: object
+  router.ChatResponse:
+    properties:
+      detected_label:
+        example: coding
+        type: string
+      response:
+        example: 'def sort(l): return sorted(l)'
+        type: string
+      source:
+        example: llm_generation
+        type: string
+      target_model:
+        example: DeepSeek-Coder-V2-Lite
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@omnitrix.io
+    name: API Support
+  description: A High-Performance Intent-Based Router for LLMs.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Omnitrix AI Gateway
+  version: "1.0"
+paths:
+  /chat:
+    post:
+      consumes:
+      - application/json
+      description: Routes the prompt to the correct LLM based on intent and user tier.
+      parameters:
+      - default: free
+        description: User Tier (free/premium)
+        in: header
+        name: X-User-Tier
+        type: string
+      - description: User Prompt
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/router.ChatRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/router.ChatResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Process a User Prompt
+      tags:
+      - chat
+swagger: "2.0"
