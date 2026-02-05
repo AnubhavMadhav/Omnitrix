@@ -53,7 +53,7 @@ You must have [Ollama](https://ollama.com/) installed and running locally. You a
 ```bash
 ollama serve
 # Open a new terminal
-ollama pull phi3            # For Intent Classification
+ollama pull phi3:mini            # For Intent Classification
 ollama pull gemma:2b        # For Creative tasks (Free)
 ollama pull deepseek-coder  # For Coding tasks (Free)
 ```
